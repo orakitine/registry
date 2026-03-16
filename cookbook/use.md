@@ -1,4 +1,4 @@
-# Use a Skill from the Library
+# Use a Skill from the Registry
 
 ## Context
 Pull a skill, agent, or prompt from the catalog into the local environment. If already installed locally, overwrite with the latest from the source (refresh).
@@ -8,30 +8,30 @@ The user provides a skill name or description.
 
 ## Steps
 
-### 1. Sync the Library Repo
+### 1. Sync the Registry Repo
 Pull the latest catalog before reading:
 ```bash
-cd <LIBRARY_SKILL_DIR>
+cd <REGISTRY_SKILL_DIR>
 git pull
 ```
 
 ### 2. Find the Entry
-- Read `library.yaml`
-- Search across `library.skills`, `library.agents`, and `library.prompts`
+- Read `registry.yaml`
+- Search across `registry.skills`, `registry.agents`, and `registry.prompts`
 - Match by name (exact) or description (fuzzy/keyword match)
 - If multiple matches, show them and ask the user to pick one
-- If no match, tell the user and suggest `/library search`
+- If no match, tell the user and suggest `/registry search`
 
 ### 3. Resolve Dependencies
 If the entry has a `requires` field:
 - For each typed reference (`skill:name`, `agent:name`, `prompt:name`):
-  - Look it up in `library.yaml`
+  - Look it up in `registry.yaml`
   - If found, recursively run the `use` workflow for that dependency first
-  - If not found, warn the user: "Dependency <ref> not found in library catalog"
+  - If not found, warn the user: "Dependency <ref> not found in registry catalog"
 - Process all dependencies before the requested item
 
 ### 4. Determine Target Directory
-- Read `default_dirs` from `library.yaml`
+- Read `default_dirs` from `registry.yaml`
 - If user said "global" or "globally" → use the `global` path
 - If user specified a custom path → use that path
 - Otherwise → use the `default` path

@@ -1,7 +1,7 @@
-# Install The Library
+# Install The Registry
 
 ## Context
-First-time setup of The Library on a new device. The user either has the template repo cloned directly, or has already forked it to their own private repo.
+First-time setup of The Registry on a new device. The user either has the repo cloned directly, or has already forked it to their own repo.
 
 ## Steps
 
@@ -13,10 +13,10 @@ First-time setup of The Library on a new device. The user either has the templat
 Ask the user: **"Is this the template repo or your own fork?"**
 
 **If template repo (hasn't forked yet):**
-- Instruct the user to create a private fork on GitHub
+- Instruct the user to create a fork on GitHub
 - Once forked, update the remote URL:
   ```bash
-  cd <LIBRARY_SKILL_DIR>
+  cd <REGISTRY_SKILL_DIR>
   git remote set-url origin <fork_url>
   ```
 - Verify with: `git remote -v`
@@ -27,29 +27,29 @@ Ask the user: **"Is this the template repo or your own fork?"**
 ### 3. Clone to Global Skills Directory
 If the repo isn't already cloned locally:
 ```bash
-mkdir -p <LIBRARY_SKILL_DIR>
-cd <LIBRARY_SKILL_DIR>
+mkdir -p <REGISTRY_SKILL_DIR>
+cd <REGISTRY_SKILL_DIR>
 git clone <fork_url> .
 ```
 
 If already cloned (e.g., user cloned the template first), just update the remote per step 2.
 
 ### 4. Update Variables
-- Open `SKILL.md` in the library directory
+- Open `SKILL.md` in the registry directory
 - Take note of your current working directory.
 - Update the `## Variables` section:
-  - **LIBRARY_REPO_URL**: Set to the user's fork URL
-  - **LIBRARY_YAML_PATH**: Confirm path (default: `~/.claude/skills/library/library.yaml`)
-  - **LIBRARY_SKILL_DIR**: Confirm path (default: `~/.claude/skills/library/`)
+  - **REGISTRY_REPO_URL**: Set to the user's repo URL
+  - **REGISTRY_YAML_PATH**: Confirm path (default: `~/.claude/skills/registry/registry.yaml`)
+  - **REGISTRY_SKILL_DIR**: Confirm path (default: `~/.claude/skills/registry/`)
 
 ### 5. Verify Installation
-- Confirm SKILL.md exists at `<LIBRARY_SKILL_DIR>/SKILL.md`
-- Confirm library.yaml exists at `<LIBRARY_SKILL_DIR>/library.yaml`
-- Confirm the `/library` command is now available
+- Confirm SKILL.md exists at `<REGISTRY_SKILL_DIR>/SKILL.md`
+- Confirm registry.yaml exists at `<REGISTRY_SKILL_DIR>/registry.yaml`
+- Confirm the `/registry` command is now available
 
 ### 6. Done
 Tell the user:
-- The Library is now globally available
-- `/library list` will show the catalog (empty by default)
-- `/library add` to start adding skills, agents, and prompts
-- The `justfile` in the library directory has shorthand commands
+- The Registry is now globally available
+- `/registry list` will show the catalog (empty by default)
+- `/registry add` to start adding skills, agents, and prompts
+- The `justfile` in the registry directory has shorthand commands

@@ -1,20 +1,20 @@
 # List Available Skills
 
 ## Context
-Show the full library catalog with install status.
+Show the full registry catalog with install status.
 
 ## Steps
 
-### 1. Sync the Library Repo
+### 1. Sync the Registry Repo
 Pull the latest catalog before reading:
 ```bash
-cd <LIBRARY_SKILL_DIR>
+cd <REGISTRY_SKILL_DIR>
 git pull
 ```
 
 ### 2. Read the Catalog
-- Read `library.yaml`
-- Parse all entries from `library.skills`, `library.agents`, and `library.prompts`
+- Read `registry.yaml`
+- Parse all entries from `registry.skills`, `registry.agents`, and `registry.prompts`
 
 ### 3. Check Install Status
 For each entry:

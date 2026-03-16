@@ -5,16 +5,16 @@ Refresh every locally installed skill, agent, and prompt by re-pulling from its 
 
 ## Steps
 
-### 1. Sync the Library Repo
+### 1. Sync the Registry Repo
 Pull the latest catalog before reading:
 ```bash
-cd <LIBRARY_SKILL_DIR>
+cd <REGISTRY_SKILL_DIR>
 git pull
 ```
 
 ### 2. Read the Catalog
-- Read `library.yaml`
-- Parse all entries from `library.skills`, `library.agents`, and `library.prompts`
+- Read `registry.yaml`
+- Parse all entries from `registry.skills`, `registry.agents`, and `registry.prompts`
 
 ### 3. Find All Installed Items
 For each entry in the catalog:

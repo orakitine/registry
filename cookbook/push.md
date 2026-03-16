@@ -1,4 +1,4 @@
-# Push a Skill to the Library Source
+# Push a Skill to the Source
 
 ## Context
 The user has improved a skill locally and wants to push changes back to the source.
@@ -9,7 +9,7 @@ The user provides a skill name or description.
 ## Steps
 
 ### 1. Find the Entry
-- Read `library.yaml`
+- Read `registry.yaml`
 - Search across all sections for the matching entry
 - If no match, tell the user the item wasn't found in the catalog
 
@@ -66,7 +66,7 @@ The user provides a skill name or description.
   ```
 - Commit with the standard format:
   ```bash
-  git commit -m "library: updated <name> <brief description of what changed>"
+  git commit -m "registry: updated <name> <brief description of what changed>"
   ```
 - Push:
   ```bash

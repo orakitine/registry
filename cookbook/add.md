@@ -1,17 +1,17 @@
-# Add a New Entry to the Library
+# Add a New Entry to the Registry
 
 ## Context
-Register a new skill, agent, or prompt in the library catalog.
+Register a new skill, agent, or prompt in the registry catalog.
 
 ## Input
 The user provides: name, description, source, and optionally type and dependencies.
 
 ## Steps
 
-### 1. Sync the Library Repo
+### 1. Sync the Registry Repo
 Pull the latest changes before modifying:
 ```bash
-cd <LIBRARY_SKILL_DIR>
+cd <REGISTRY_SKILL_DIR>
 git pull
 ```
 
@@ -30,15 +30,15 @@ Figure out the type from the user's prompt or the source path:
 ### 4. Parse Dependencies
 Detect dependencies by looking through the skill/agent/prompt files, format them as typed references:
 - `skill:name`, `agent:name`, `prompt:name`
-- Verify each dependency already exists in `library.yaml` if or warn the user
-  - If they don't exist add them to `library.yaml` first. If those files have dependencies, add them recursively.
+- Verify each dependency already exists in `registry.yaml` if or warn the user
+  - If they don't exist add them to `registry.yaml` first. If those files have dependencies, add them recursively.
   - You can detect these sometimes by looking at the frontmatter, and then in the file content look for `/<prompt|agent|skill>:name` references. If you're not sure, ask the user the user if they have any dependencies.
 
-### 5. Add the Entry to library.yaml
-Read `library.yaml`, add the new entry under the correct section:
+### 5. Add the Entry to registry.yaml
+Read `registry.yaml`, add the new entry under the correct section:
 
 ```yaml
-# Under library.skills, library.agents, or library.prompts
+# Under registry.skills, registry.agents, or registry.prompts
 - name: <name>
   description: <description>
   source: <source>
@@ -57,11 +57,11 @@ Read `library.yaml`, add the new entry under the correct section:
 
 ### 6. Commit and Push
 ```bash
-cd <LIBRARY_SKILL_DIR>
-git add library.yaml
-git commit -m "library: added <type> <name>"
+cd <REGISTRY_SKILL_DIR>
+git add registry.yaml
+git commit -m "registry: added <type> <name>"
 git push
 ```
 
 ### 7. Confirm
-Tell the user the entry has been added and is now available for others to use via `/library use <name>`.
+Tell the user the entry has been added and is now available for others to use via `/registry use <name>`.
