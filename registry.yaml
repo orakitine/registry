@@ -10,6 +10,9 @@ default_dirs:
     - global: ~/.claude/commands/
 
 registry:
-  skills: []
+  skills:
+    - name: skill-forge
+      description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
   agents: []
   prompts: []
