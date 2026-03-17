@@ -15,6 +15,11 @@ registry:
       description: Headless browser automation via playwright-cli for testing, screenshots, scraping, and parallel sessions. Use for UI testing, web scraping, screenshot capture, or any browser-based workflow.
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser/SKILL.md
 
+    - name: browser-review
+      description: Parallel UI validation that discovers user stories from YAML files, fans out browser-qa agents, and aggregates pass/fail results with screenshots. Use for acceptance testing or regression testing.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/browser-review/SKILL.md
+      requires: [skill:browser, agent:browser-qa]
+
     - name: browser-workflow
       description: Executes saved browser automation workflows with consistent setup, teardown, and reporting. Use for repeatable browser automations like scraping, form-filling, or monitoring.
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser-workflow/SKILL.md
