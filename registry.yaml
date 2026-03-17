@@ -14,6 +14,7 @@ registry:
     - name: browser
       description: Headless browser automation via playwright-cli for testing, screenshots, scraping, and parallel sessions. Use for UI testing, web scraping, screenshot capture, or any browser-based workflow.
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser/SKILL.md
+      requires: [agent:browser-operator, agent:browser-qa]
 
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
@@ -22,4 +23,8 @@ registry:
     - name: browser-operator
       description: General-purpose browser automation agent for headless browsing, screenshots, scraping, and parallel sessions. Use when spawning browser tasks as subagents.
       source: https://github.com/orakitine/toolbox/blob/main/agents/browser-operator.md
+
+    - name: browser-qa
+      description: UI validation agent that executes user stories against web apps and reports structured pass/fail results with screenshots. Use for QA, acceptance testing, or UI verification.
+      source: https://github.com/orakitine/toolbox/blob/main/agents/browser-qa.md
   prompts: []
