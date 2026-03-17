@@ -11,6 +11,10 @@ default_dirs:
 
 registry:
   skills:
+    - name: browser
+      description: Headless browser automation via playwright-cli for testing, screenshots, scraping, and parallel sessions. Use for UI testing, web scraping, screenshot capture, or any browser-based workflow.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/browser/SKILL.md
+
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
