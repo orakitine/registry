@@ -25,6 +25,10 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser-workflow/SKILL.md
       requires: [skill:browser]
 
+    - name: skill-guide
+      description: Discovers and explains installed skills and agents. Lists what's available, shows how to use them, explains families and dependencies. Use when asking what skills exist, how to use a skill, or what tools are available.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/skill-guide/SKILL.md
+
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
