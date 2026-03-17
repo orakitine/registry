@@ -18,5 +18,8 @@ registry:
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
-  agents: []
+  agents:
+    - name: browser-operator
+      description: General-purpose browser automation agent for headless browsing, screenshots, scraping, and parallel sessions. Use when spawning browser tasks as subagents.
+      source: https://github.com/orakitine/toolbox/blob/main/agents/browser-operator.md
   prompts: []
