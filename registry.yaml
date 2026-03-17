@@ -25,13 +25,17 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser-workflow/SKILL.md
       requires: [skill:browser]
 
-    - name: skill-guide
-      description: Discovers and explains installed skills and agents. Lists what's available, shows how to use them, explains families and dependencies. Use when asking what skills exist, how to use a skill, or what tools are available.
-      source: https://github.com/orakitine/toolbox/blob/main/skills/skill-guide/SKILL.md
+    - name: elevenlabs
+      description: Text-to-speech, sound effects, music generation, and audio processing using the ElevenLabs API via bundled Python CLI. Use for voice generation, audio content creation, sound design, or audio processing.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/elevenlabs/SKILL.md
 
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
+
+    - name: skill-guide
+      description: Discovers and explains installed skills and agents. Lists what's available, shows how to use them, explains families and dependencies. Use when asking what skills exist, how to use a skill, or what tools are available.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/skill-guide/SKILL.md
   agents:
     - name: browser-operator
       description: General-purpose browser automation agent for headless browsing, screenshots, scraping, and parallel sessions. Use when spawning browser tasks as subagents.
@@ -42,4 +46,14 @@ registry:
       description: UI validation agent that executes user stories against web apps and reports structured pass/fail results with screenshots. Use for QA, acceptance testing, or UI verification.
       source: https://github.com/orakitine/toolbox/blob/main/agents/browser-qa.md
       requires: [skill:browser]
+
+    - name: elevenlabs-operator
+      description: Audio generation agent using ElevenLabs API. Use for text-to-speech, sound effects, music generation, audio isolation, or stem separation. Supports parallel instances.
+      source: https://github.com/orakitine/toolbox/blob/main/agents/elevenlabs-operator.md
+      requires: [skill:elevenlabs]
+
+    - name: elevenlabs-voice-designer
+      description: Voice casting agent that searches the ElevenLabs voice library, matches characters to voices, and generates audition samples with structured recommendations.
+      source: https://github.com/orakitine/toolbox/blob/main/agents/elevenlabs-voice-designer.md
+      requires: [skill:elevenlabs]
   prompts: []
