@@ -15,6 +15,11 @@ registry:
       description: Headless browser automation via playwright-cli for testing, screenshots, scraping, and parallel sessions. Use for UI testing, web scraping, screenshot capture, or any browser-based workflow.
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser/SKILL.md
 
+    - name: browser-workflow
+      description: Executes saved browser automation workflows with consistent setup, teardown, and reporting. Use for repeatable browser automations like scraping, form-filling, or monitoring.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/browser-workflow/SKILL.md
+      requires: [skill:browser]
+
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
