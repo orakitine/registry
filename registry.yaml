@@ -25,9 +25,17 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser-workflow/SKILL.md
       requires: [skill:browser]
 
+    - name: doc-cache
+      description: Transparent read-through cache for documentation lookups. Checks cache before WebFetch, caches results with expiration, garbage collects stale entries. Use automatically when fetching docs, API references, or technical documentation.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/doc-cache/SKILL.md
+
     - name: elevenlabs
       description: Text-to-speech, sound effects, music generation, and audio processing using the ElevenLabs API via bundled Python CLI. Use for voice generation, audio content creation, sound design, or audio processing.
       source: https://github.com/orakitine/toolbox/blob/main/skills/elevenlabs/SKILL.md
+
+    - name: fork-terminal
+      description: Fork a terminal session to a new window with a command or agentic coding tool (Claude Code, Codex CLI, Gemini CLI). Supports context handoff. Use when the user requests fork terminal, new terminal, or fork session.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/fork-terminal/SKILL.md
 
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
