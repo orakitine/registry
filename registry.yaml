@@ -33,6 +33,10 @@ registry:
       description: Text-to-speech, sound effects, music generation, and audio processing using the ElevenLabs API via bundled Python CLI. Use for voice generation, audio content creation, sound design, or audio processing.
       source: https://github.com/orakitine/toolbox/blob/main/skills/elevenlabs/SKILL.md
 
+    - name: gen-image
+      description: Generate or edit images using AI image models. Currently supports Google Gemini (Imagen 4 for creation, Gemini Flash for editing). Provider-agnostic design. Use for image generation, visual content creation, or image editing tasks.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/gen-image/SKILL.md
+
     - name: fork-terminal
       description: Fork a terminal session to a new window with a command or agentic coding tool (Claude Code, Codex CLI, Gemini CLI). Supports context handoff. Use when the user requests fork terminal, new terminal, or fork session.
       source: https://github.com/orakitine/toolbox/blob/main/skills/fork-terminal/SKILL.md
@@ -54,6 +58,11 @@ registry:
       description: UI validation agent that executes user stories against web apps and reports structured pass/fail results with screenshots. Use for QA, acceptance testing, or UI verification.
       source: https://github.com/orakitine/toolbox/blob/main/agents/browser-qa.md
       requires: [skill:browser]
+
+    - name: gen-image-operator
+      description: Image generation and editing agent using Gemini/Imagen APIs. Use for creating images from text prompts, editing existing images, or batch image generation. Supports parallel instances.
+      source: https://github.com/orakitine/toolbox/blob/main/agents/gen-image-operator.md
+      requires: [skill:gen-image]
 
     - name: elevenlabs-operator
       description: Audio generation agent using ElevenLabs API. Use for text-to-speech, sound effects, music generation, audio isolation, or stem separation. Supports parallel instances.
