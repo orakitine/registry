@@ -5,16 +5,15 @@ Show the full registry catalog with install status.
 
 ## Steps
 
-### 1. Sync the Registry Repo
-Pull the latest catalog before reading:
+### 1. Sync the Registry Repo, then Read the Catalog
+**These steps are sequential — do NOT read the file until the pull completes.**
+
 ```bash
 cd <REGISTRY_SKILL_DIR>
 git pull
 ```
 
-### 2. Read the Catalog
-- Read `registry.yaml`
-- Parse all entries from `registry.skills`, `registry.agents`, and `registry.prompts`
+After the pull finishes, read `registry.yaml` and parse all entries from `registry.skills`, `registry.agents`, and `registry.prompts`.
 
 ### 3. Check Install Status
 For each entry:

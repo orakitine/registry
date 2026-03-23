@@ -8,15 +8,15 @@ The user provides a skill name or description.
 
 ## Steps
 
-### 1. Sync the Registry Repo
-Pull the latest catalog before reading:
+### 1. Sync the Registry Repo, then Find the Entry
+**These steps are sequential — do NOT read the file until the pull completes.**
+
 ```bash
 cd <REGISTRY_SKILL_DIR>
 git pull
 ```
 
-### 2. Find the Entry
-- Read `registry.yaml`
+After the pull finishes, read `registry.yaml` and find the entry:
 - Search across `registry.skills`, `registry.agents`, and `registry.prompts`
 - Match by name (exact) or description (fuzzy/keyword match)
 - If multiple matches, show them and ask the user to pick one

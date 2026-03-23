@@ -9,7 +9,7 @@ The user provides: name, description, source, and optionally type and dependenci
 ## Steps
 
 ### 1. Sync the Registry Repo
-Pull the latest changes before modifying:
+**Pull first — do NOT read registry.yaml until this completes.**
 ```bash
 cd <REGISTRY_SKILL_DIR>
 git pull
