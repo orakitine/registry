@@ -41,6 +41,11 @@ registry:
       description: Fork a terminal session to a new window with a command or agentic coding tool (Claude Code, Codex CLI, Gemini CLI). Supports context handoff. Use when the user requests fork terminal, new terminal, or fork session.
       source: https://github.com/orakitine/toolbox/blob/main/skills/fork-terminal/SKILL.md
 
+    - name: speak
+      description: Provider-agnostic text-to-speech output. Converts text to audio and plays it immediately. Falls back through available TTS providers (elevenlabs, macOS say). Use as a composable voice output primitive from any skill, agent, or workflow.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/speak/SKILL.md
+      requires: [skill:elevenlabs]
+
     - name: skill-forge
       description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
@@ -68,6 +73,11 @@ registry:
       description: Audio generation agent using ElevenLabs API. Use for text-to-speech, sound effects, music generation, audio isolation, or stem separation. Supports parallel instances.
       source: https://github.com/orakitine/toolbox/blob/main/agents/elevenlabs-operator.md
       requires: [skill:elevenlabs]
+
+    - name: speak-narrator
+      description: Narration agent that digests content into engaging spoken summaries and delivers them via the speak skill. Reshapes raw output into listener-friendly narration. Use when output should be heard, not read.
+      source: https://github.com/orakitine/toolbox/blob/main/agents/speak-narrator.md
+      requires: [skill:speak]
 
     - name: elevenlabs-voice-designer
       description: Voice casting agent that searches the ElevenLabs voice library, matches characters to voices, and generates audition samples with structured recommendations.
