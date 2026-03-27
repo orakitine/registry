@@ -37,6 +37,10 @@ registry:
       description: Generate or edit images using AI image models. Currently supports Google Gemini (Imagen 4 for creation, Gemini Flash for editing). Provider-agnostic design. Use for image generation, visual content creation, or image editing tasks.
       source: https://github.com/orakitine/toolbox/blob/main/skills/gen-image/SKILL.md
 
+    - name: menu-app
+      description: Convert a restaurant menu (PDF, image, Word, HTML, Markdown) into a self-contained single-page HTML ordering app with search, filters, cart, and copy-to-clipboard order text. Use when given a menu file to turn into an interactive ordering tool.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/menu-app/SKILL.md
+
     - name: fork-terminal
       description: Fork a terminal session to a new window with a command or agentic coding tool (Claude Code, Codex CLI, Gemini CLI). Supports context handoff. Use when the user requests fork terminal, new terminal, or fork session.
       source: https://github.com/orakitine/toolbox/blob/main/skills/fork-terminal/SKILL.md
