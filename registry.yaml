@@ -51,7 +51,7 @@ registry:
       requires: [skill:elevenlabs]
 
     - name: skill-forge
-      description: Creates, evaluates, and refines Claude Code skills, agents, and commands. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming.
+      description: Creates, evaluates, and refines agent skills following the agentskills.io specification. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming. Produces portable skills that work across any compliant agent harness.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
 
     - name: skill-guide
