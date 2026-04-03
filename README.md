@@ -8,7 +8,7 @@ The Registry is a single skill whose only job is to manage other skills. It's a 
 
 Think of it as a `package.json` for agent capabilities — but instead of packages, you're managing skills, agents, and prompts. Instead of a registry like npm, you're pointing at your own GitHub repos and local paths.
 
-**This is a pure agent application.** No scripts, no CLIs, no dependencies, no build tools. The entire application is encoded in `SKILL.md` and a set of cookbook instructions that teach the agent what to do. The agent IS the runtime.
+**This is a pure agent application.** No scripts, no CLIs, no dependencies, no build tools. The entire application is encoded in `SKILL.md` and a set of reference docs that teach the agent what to do. The agent IS the runtime.
 
 ## Why It Exists
 
@@ -170,7 +170,7 @@ just search "keyword"
 ~/.claude/skills/registry/        # The Registry skill (globally installed)
     SKILL.md                       # Agent instructions — the brain
     registry.yaml                  # Your catalog of references
-    cookbook/                       # Step-by-step guides for each command
+    references/                    # Command recipes + shared reference material
         install.md
         add.md
         use.md
@@ -179,6 +179,7 @@ just search "keyword"
         list.md
         sync.md
         search.md
+        source-formats.md          # Source parsing, fetch/push workflows
     justfile                       # CLI shorthand for all commands
     README.md                      # This file
 ```

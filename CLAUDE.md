@@ -12,7 +12,7 @@ A skill registry — a pure-agent application (no scripts, no CLIs) that manages
 
 - `SKILL.md` — the brain, teaches Claude how to execute registry commands
 - `registry.yaml` — the catalog of pointers (NOT copies) to skills/agents/prompts
-- `cookbook/*.md` — step-by-step recipes for each command (add, use, push, sync, etc.)
+- `references/*.md` — step-by-step recipes for each command + shared reference material (source formats, fetch/push workflows)
 - `justfile` — terminal shortcuts for non-interactive use
 
 ## Key Design Decisions
@@ -34,5 +34,5 @@ Oleg runs 2 laptops + 1 Linux box. The registry syncs across them via git push/p
 ## Editing Guidelines
 
 - All files are markdown — edit markdown, not code
-- When renaming concepts, update: SKILL.md, registry.yaml, all cookbook files, justfile, README.md
+- When renaming concepts, update: SKILL.md, registry.yaml, all reference files, justfile, README.md
 - Keep the credits line for Dan in README.md

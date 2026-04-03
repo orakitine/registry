@@ -1,6 +1,9 @@
 ---
 name: registry
-description: Skill registry for distributing skills, agents, and prompts across devices, projects, and teams. Use when installing, distributing, syncing, or managing skills from a catalog.
+description: >-
+  Skill registry for distributing skills, agents, and prompts across devices,
+  projects, and teams. Use when installing, distributing, syncing, or managing
+  skills from a catalog.
 argument-hint: "[command] [name or details]"
 allowed-tools:
   - Read
@@ -13,53 +16,46 @@ allowed-tools:
 
 # Purpose
 
-A catalog-based distribution system for skills, agents, and prompts. The `registry.yaml` stores pointers (local paths and GitHub URLs) to where assets live. Nothing is fetched until you ask for it. Pull specific items on demand.
+A catalog-based distribution system for skills, agents, and prompts. The `./registry.yaml` stores pointers (local paths and GitHub URLs) to where assets live. Nothing is fetched until you ask for it. Pull specific items on demand.
 
 ## Variables
 
-REGISTRY_REPO_URL: https://github.com/orakitine/registry.git          # Remote URL for the registry repo
-REGISTRY_YAML_PATH: ${CLAUDE_SKILL_DIR}/registry.yaml                  # Path to the catalog file
-REGISTRY_SKILL_DIR: ${CLAUDE_SKILL_DIR}                                # Where the registry skill is installed
+REGISTRY_REPO_URL: https://github.com/orakitine/registry.git   # Remote URL for the registry repo
 
 ## Workflow
 
 1. **Parse Command**
    - Determine which subcommand from `$ARGUMENTS`
-   - IF: "install" → first-time setup
-   - IF: "add" → register a new entry
-   - IF: "use" → pull from source
-   - IF: "push" → push local changes back
-   - IF: "remove" → remove from catalog
-   - IF: "list" → show catalog with install status
-   - IF: "sync" → re-pull all installed items
-   - IF: "search" → find by keyword
-   - Example: "/registry use browser globally" → use command, name=browser, target=global
-   - Example: "/registry add deploy skill from https://github.com/..." → add command
+   - IF: "install" → THEN: first-time setup
+   - IF: "add" → THEN: register a new entry
+   - IF: "use" → THEN: pull from source
+   - IF: "push" → THEN: push local changes back
+   - IF: "remove" → THEN: remove from catalog
+   - IF: "list" → THEN: show catalog with install status
+   - IF: "sync" → THEN: re-pull all installed items
+   - IF: "search" → THEN: find by keyword
+   - Example: "/registry use browser globally" → Route to use reference, name=browser, target=global
 
-2. **Read the Catalog**
-   - Read `${CLAUDE_SKILL_DIR}/registry.yaml` for current entries and `default_dirs`
-   - For source format details, see `${CLAUDE_SKILL_DIR}/reference/source-formats.md`
-   - Example: Catalog has 5 skills, 2 agents → ready to route
+2. **Route to Reference**
+   - Read the matching reference file, then execute its steps
+   - Each reference handles its own catalog read (after git pull)
+   - For source format details, references delegate to `./references/source-formats.md`
+   - Example: "use" → Read and execute `./references/use.md`
    - Tool: Read
 
-3. **Route to Cookbook**
-   - Read the matching cookbook file, then execute its steps
-   - Example: "use" → read and execute `${CLAUDE_SKILL_DIR}/cookbook/use.md`
-   - Tool: Read
-
-## Cookbook
+## References
 
 ### Install (First-Time Setup)
 
 - IF: User wants to set up the registry on a new device
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/install.md`
+- THEN: Read and execute `./references/install.md`
 - EXAMPLES:
   - "/registry install"
 
 ### Add Entry
 
 - IF: User wants to register a new skill, agent, or prompt in the catalog
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/add.md`
+- THEN: Read and execute `./references/add.md`
 - EXAMPLES:
   - "/registry add deploy skill from https://github.com/org/repo/blob/main/skills/deploy/SKILL.md"
   - "/registry add browser-qa agent from ~/Documents/toolbox/agents/browser-qa.md"
@@ -67,43 +63,43 @@ REGISTRY_SKILL_DIR: ${CLAUDE_SKILL_DIR}                                # Where t
 ### Use (Pull from Source)
 
 - IF: User wants to pull or refresh a skill from the catalog
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/use.md`
+- THEN: Read and execute `./references/use.md`
 - EXAMPLES:
   - "/registry use browser"
   - "/registry use browser-qa globally"
 
-### Push (Local → Source)
+### Push (Local to Source)
 
 - IF: User improved a skill locally and wants to update the source
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/push.md`
+- THEN: Read and execute `./references/push.md`
 - EXAMPLES:
   - "/registry push browser"
 
 ### Remove
 
 - IF: User wants to remove an entry from the catalog
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/remove.md`
+- THEN: Read and execute `./references/remove.md`
 - EXAMPLES:
   - "/registry remove old-skill"
 
 ### List
 
 - IF: User wants to see the full catalog with install status
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/list.md`
+- THEN: Read and execute `./references/list.md`
 - EXAMPLES:
   - "/registry list"
 
 ### Sync (Re-Pull All)
 
 - IF: User wants to refresh all installed items from their sources
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/sync.md`
+- THEN: Read and execute `./references/sync.md`
 - EXAMPLES:
   - "/registry sync"
 
 ### Search
 
 - IF: User is looking for a skill but doesn't know the exact name
-- THEN: Read and execute `${CLAUDE_SKILL_DIR}/cookbook/search.md`
+- THEN: Read and execute `./references/search.md`
 - EXAMPLES:
   - "/registry search browser"
   - "/registry search QA"
