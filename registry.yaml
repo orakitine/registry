@@ -34,7 +34,7 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/elevenlabs/SKILL.md
 
     - name: gen-image
-      description: Generate or edit images using AI image models. Currently supports Google Gemini (Imagen 4 for creation, Gemini Flash for editing). Provider-agnostic design. Use for image generation, visual content creation, or image editing tasks.
+      description: Generate or edit images using AI image models. Currently supports Google Gemini (Nano Banana Pro for creation, Nano Banana for editing). Provider-agnostic design. Use for image generation, visual content creation, or image editing tasks.
       source: https://github.com/orakitine/toolbox/blob/main/skills/gen-image/SKILL.md
 
     - name: menu-app
