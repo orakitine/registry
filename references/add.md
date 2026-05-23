@@ -30,13 +30,14 @@ Figure out the type from the user's prompt or the source path:
 - Example: `https://github.com/org/repo/blob/main/skills/deploy/SKILL.md` → valid GitHub browser URL
 
 ### 4. **Parse Dependencies**
-Detect dependencies by looking through the skill/agent/prompt files:
+Detect dependencies by reading the skill/agent/prompt body content:
 - Format as typed references: `skill:name`, `agent:name`, `prompt:name`
 - Verify each dependency already exists in `./registry.yaml` or warn the user
 - IF: dependencies don't exist → THEN: add them to `./registry.yaml` first, recursively
-- Detect from frontmatter and file content (look for `/<prompt|agent|skill>:name` references)
+- Detect from body text: look for skill/agent references in Skills sections, workflow steps, and `context: fork` / `agent:` frontmatter wiring
+- Do NOT rely on a `skills:` frontmatter field — dependencies are declared in `registry.yaml` only
 - IF: not sure → THEN: ask the user if they have any dependencies
-- Example: Skill references `agent:browser-qa` → check registry → found → add to `requires`
+- Example: Agent body has `## Skills` listing `browser` → check registry → found → add `requires: [skill:browser]`
 
 ### 5. **Add the Entry to registry.yaml**
 Read `./registry.yaml`, add the new entry under the correct section:
