@@ -25,6 +25,14 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser-workflow/SKILL.md
       requires: [skill:browser]
 
+    - name: caveman
+      description: Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler, articles, and pleasantries while keeping full technical accuracy. Use when user wants terse responses or invokes /caveman.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/caveman/SKILL.md
+
+    - name: diagnose
+      description: Disciplined diagnosis loop for hard bugs and performance regressions. Reproduce, hypothesise, instrument, fix, regression-test. Use when reporting a bug, debugging broken/flaky behavior, or chasing a performance regression.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/diagnose/SKILL.md
+
     - name: doc-cache
       description: Transparent read-through cache for documentation lookups. Checks cache before WebFetch, caches results with expiration, garbage collects stale entries. Use automatically when fetching docs, API references, or technical documentation.
       source: https://github.com/orakitine/toolbox/blob/main/skills/doc-cache/SKILL.md
@@ -36,6 +44,23 @@ registry:
     - name: gen-image
       description: Generate or edit images using AI image models. Currently supports Google Gemini (Nano Banana Pro for creation, Nano Banana for editing). Provider-agnostic design. Use for image generation, visual content creation, or image editing tasks.
       source: https://github.com/orakitine/toolbox/blob/main/skills/gen-image/SKILL.md
+
+    - name: grill-me
+      description: Relentless interview mode for stress-testing a plan or design. Walks every branch of the decision tree one question at a time, each with a recommended answer. Use when wanting to be grilled on a plan, stress-test a design, or poke holes in a decision.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/grill-me/SKILL.md
+
+    - name: grill-with-docs
+      description: Grilling session that maintains CONTEXT.md (project glossary) and docs/adr/ (architecture decision records) inline as decisions crystallize. Use when stress-testing a design while building up the project's shared language.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/grill-with-docs/SKILL.md
+
+    - name: handoff
+      description: Compacts the current conversation into a handoff doc (saved to OS temp dir) so another agent can continue the work. Redacts secrets, references external artifacts instead of duplicating them. Use when wrapping a session for the next one.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/handoff/SKILL.md
+
+    - name: improve-codebase-architecture
+      description: Finds deepening opportunities (Ousterhout) in a codebase, informed by CONTEXT.md and docs/adr/. Produces an HTML architecture review with diagrams. Use periodically to rescue codebases drifting toward ball-of-mud.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/improve-codebase-architecture/SKILL.md
+      requires: [skill:grill-with-docs]
 
     - name: menu-app
       description: Convert a restaurant menu (PDF, image, Word, HTML, Markdown) into a self-contained single-page HTML ordering app with search, filters, cart, and copy-to-clipboard order text. Use when given a menu file to turn into an interactive ordering tool.
@@ -50,6 +75,11 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/speak/SKILL.md
       requires: [skill:elevenlabs]
 
+    - name: setup-toolbox-context
+      description: Scaffolds CONTEXT.md (project glossary) and docs/adr/ lazily — only creating files when there's real content. Use before first use of grill-with-docs or improve-codebase-architecture to bootstrap the domain-documentation convention.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/setup-toolbox-context/SKILL.md
+      requires: [skill:grill-with-docs]
+
     - name: skill-forge
       description: Creates, evaluates, and refines agent skills following the agentskills.io specification. Use when building new skills from scratch, auditing existing skills for quality, or cleaning up skill structure and naming. Produces portable skills that work across any compliant agent harness.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-forge/SKILL.md
@@ -57,6 +87,14 @@ registry:
     - name: skill-guide
       description: Discovers and explains installed skills and agents. Lists what's available, shows how to use them, explains families and dependencies. Use when asking what skills exist, how to use a skill, or what tools are available.
       source: https://github.com/orakitine/toolbox/blob/main/skills/skill-guide/SKILL.md
+
+    - name: tdd
+      description: Test-driven development with red-green-refactor loop and vertical-slice tracer bullets. Calls out the horizontal-slice anti-pattern. Use when building features or fixing bugs test-first.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/tdd/SKILL.md
+
+    - name: zoom-out
+      description: Pulls the agent up a layer of abstraction and maps the relevant modules and callers around the code in focus, using the project's domain glossary vocabulary. Use when unfamiliar with a section of code.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/zoom-out/SKILL.md
   agents:
     - name: browser-operator
       description: General-purpose browser automation agent for headless browsing, screenshots, scraping, and parallel sessions. Use when spawning browser tasks as subagents.
