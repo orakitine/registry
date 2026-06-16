@@ -15,6 +15,10 @@ registry:
       description: Headless browser automation via playwright-cli for testing, screenshots, scraping, and parallel sessions. Use for UI testing, web scraping, screenshot capture, or any browser-based workflow.
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser/SKILL.md
 
+    - name: browser-microscope
+      description: Real-browser DOM and layout forensics. Hit-tests why a click won't land (elementFromPoint), dumps scroll/box geometry, reads live CSS custom-property tokens, and sweeps viewport widths to find breakpoint/container-query bugs. Drives the local Playwright npm package. Use when a click won't register, an element is overlapped/clipped/off-screen, scroll geometry looks wrong, or a layout bug only appears at certain widths.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/browser-microscope/SKILL.md
+
     - name: browser-review
       description: Parallel UI validation that discovers user stories from YAML files, fans out browser-qa agents, and aggregates pass/fail results with screenshots. Use for acceptance testing or regression testing.
       source: https://github.com/orakitine/toolbox/blob/main/skills/browser-review/SKILL.md
