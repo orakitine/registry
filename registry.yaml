@@ -42,7 +42,7 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/doc-cache/SKILL.md
 
     - name: elevenlabs
-      description: Text-to-speech, sound effects, music generation, and audio processing using the ElevenLabs API via bundled Python CLI. Use for voice generation, audio content creation, sound design, or audio processing.
+      description: Text-to-speech, multi-voice dialogue, custom voice design, sound effects, music generation, and audio processing using the ElevenLabs API via bundled Python CLI. Use for voice generation, character voices, designing new voices, expressive narration with audio tags, audio content creation, or sound design.
       source: https://github.com/orakitine/toolbox/blob/main/skills/elevenlabs/SKILL.md
 
     - name: gen-image
