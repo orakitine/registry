@@ -66,6 +66,10 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/improve-codebase-architecture/SKILL.md
       requires: [skill:grill-with-docs]
 
+    - name: living-plan
+      description: Authors and maintains a living, executable engineering plan as Markdown in docs/plans/ (create/update/build). Fixed goal (Purpose + Definition of Done), living path (4-state status checklist, append-only amendments, cross-agent metadata). Reads CONTEXT.md, links docs/adr/ (never writes ADRs), and build delegates implementation to tdd. Use to plan, spec, or design work, or to build an existing plan.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/living-plan/SKILL.md
+
     - name: menu-app
       description: Convert a restaurant menu (PDF, image, Word, HTML, Markdown) into a self-contained single-page HTML ordering app with search, filters, cart, and copy-to-clipboard order text. Use when given a menu file to turn into an interactive ordering tool.
       source: https://github.com/orakitine/toolbox/blob/main/skills/menu-app/SKILL.md
