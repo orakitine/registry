@@ -66,6 +66,10 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/skills/improve-codebase-architecture/SKILL.md
       requires: [skill:grill-with-docs]
 
+    - name: ios-simulator-microscope
+      description: Reproduce and measure iOS-Safari-only layout, rendering, and interaction bugs on a booted iOS Simulator (iPad/iPhone) — the real-device counterpart to browser-microscope. Drives Safari via safaridriver + xcrun simctl to inject JS, read live geometry/viewport units, and screenshot; CGEvent drags trigger toolbar-collapse dynamics. Includes a preflight doctor (macOS-only; checks Xcode, safaridriver, Node, Swift, Accessibility). Use when a bug only shows in real iOS Safari and not in Playwright/Chromium/jsdom.
+      source: https://github.com/orakitine/toolbox/blob/main/skills/ios-simulator-microscope/SKILL.md
+
     - name: living-plan
       description: Authors and maintains a living, executable engineering plan as Markdown in docs/plans/ (create/update/build). Fixed goal (Purpose + Definition of Done), living path (4-state status checklist, append-only amendments, cross-agent metadata). Reads CONTEXT.md, links docs/adr/ (never writes ADRs), and build delegates implementation to tdd. Use to plan, spec, or design work, or to build an existing plan.
       source: https://github.com/orakitine/toolbox/blob/main/skills/living-plan/SKILL.md
