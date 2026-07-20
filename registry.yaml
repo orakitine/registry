@@ -67,7 +67,7 @@ registry:
       requires: [skill:grill-with-docs]
 
     - name: ios-simulator-microscope
-      description: Reproduce and measure iOS-Safari-only layout, rendering, and interaction bugs on a booted iOS Simulator (iPad/iPhone) — the real-device counterpart to browser-microscope. Drives Safari via safaridriver + xcrun simctl to inject JS, read live geometry/viewport units, and screenshot; CGEvent drags trigger toolbar-collapse dynamics. Includes a preflight doctor (macOS-only; checks Xcode, safaridriver, Node, Swift, Accessibility). Use when a bug only shows in real iOS Safari and not in Playwright/Chromium/jsdom.
+      description: Reproduce and measure iOS-Safari-only layout, rendering, and interaction bugs on a booted iOS Simulator (iPad/iPhone) — the real-device counterpart to browser-microscope. Two modes — safaridriver + xcrun simctl for static measurement (inject JS, read live geometry/viewport units, screenshot), and a session-free reverse-proxy bridge (sim-bridge.mjs) for gesture work, since CGEvent drags raise Safari's automation lock during a WebDriver session; toolbar-collapse dynamics run through the bridge. Includes a preflight doctor (macOS-only; checks Xcode, safaridriver, Node, Swift, Accessibility). Use when a bug only shows in real iOS Safari and not in Playwright/Chromium/jsdom.
       source: https://github.com/orakitine/toolbox/blob/main/skills/ios-simulator-microscope/SKILL.md
 
     - name: living-plan
