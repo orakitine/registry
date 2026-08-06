@@ -1,7 +1,7 @@
 # Remove an Entry from the Registry
 
 ## Context
-The user wants to remove a skill, agent, or prompt from the registry catalog and optionally delete the local copy.
+The user wants to remove a skill, agent, prompt, output style, or config from the registry catalog and optionally delete the local copy.
 
 ## Input
 The user provides a skill name or description.
@@ -18,7 +18,7 @@ After the pull finishes, read `./registry.yaml` and find the entry.
 
 ### 2. **Find the Entry**
 - Search across all sections for the matching entry
-- Determine the type (skill, agent, or prompt)
+- Determine the type (skill, agent, prompt, output-style, or config)
 - IF: no match → THEN: tell the user the item wasn't found in the catalog
 - Example: "remove old-skill" → found in skills section
 
@@ -29,7 +29,7 @@ Show the entry details and ask:
 - Example: "Remove **old-skill** from the catalog? Also delete ~/.claude/skills/old-skill/?"
 
 ### 4. **Remove from registry.yaml**
-- Remove the entry from the appropriate section (`registry.skills`, `registry.agents`, or `registry.prompts`)
+- Remove the entry from the appropriate section (`registry.skills`, `registry.agents`, `registry.prompts`, `registry.output-styles`, or `registry.configs`)
 - IF: other entries depend on this one (via `requires`) → THEN: warn the user before proceeding
 - Example: `browser-review` requires `skill:browser` → warn before removing `browser`
 
@@ -40,7 +40,10 @@ Show the entry details and ask:
     ```bash
     rm -rf <target_directory>/<name>
     ```
+  - For single-file types, remove the file (`<name>.md`, or the config's basename)
+  - IF: the entry has a `settings:` field → THEN: tell the user which `settings.json` keys reference it and ask whether to remove them too (removal is manual — the merge workflow never deletes keys)
 - Example: `rm -rf ~/.claude/skills/old-skill` → deleted
+- Example: removing config `statusline` → `rm ~/.claude/statusline.sh`, then ask about the `statusLine` key in `~/.claude/settings.json`
 
 ### 6. **Commit and Push**
 ```bash

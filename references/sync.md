@@ -1,7 +1,7 @@
 # Sync All Installed Items
 
 ## Context
-Refresh every locally installed skill, agent, and prompt by re-pulling from its source. A fast "make sure everything is up to date" command.
+Refresh every locally installed skill, agent, prompt, output style, and config by re-pulling from its source. A fast "make sure everything is up to date" command.
 
 ## Steps
 
@@ -18,6 +18,7 @@ For each entry in the catalog:
 - Determine the type and corresponding directories from `default_dirs`
 - Check if a directory/file matching the entry name exists in the **default** directory
 - Check if a directory/file matching the entry name exists in the **global** directory
+- For **configs**, match by the source file's basename (e.g. `statusline` → `statusline.sh`); for output-styles, `<name>.md`
 - Search recursively for name matches
 - Collect every entry that is installed locally (either default or global)
 - IF: nothing is installed → THEN: tell the user and exit
@@ -26,6 +27,8 @@ For each entry in the catalog:
 ### 3. **Re-pull Each Installed Item**
 For each installed entry, follow the **Fetch Workflow** in `./references/source-formats.md` for that entry's source type (local or GitHub). Pull to the same location where it's currently installed.
 - Example: `browser` installed at `~/.claude/skills/browser/` → re-fetch to same path
+
+After re-pulling, IF the entry has a `settings:` field → THEN: re-run the **Settings Merge Workflow** in `./references/source-formats.md` for the install scope. A refreshed asset may ship changed wiring; the merge is idempotent, so re-running it on unchanged wiring is a safe no-op.
 
 ### 4. **Resolve Dependencies**
 For each installed entry that has a `requires` field:

@@ -46,5 +46,5 @@ Ask the user: **"Is this the template repo or your own fork?"**
 Tell the user:
 - The Registry is now globally available
 - `/registry list` will show the catalog
-- `/registry add` to start adding skills, agents, and prompts
+- `/registry add` to start adding skills, agents, prompts, output styles, and configs
 - The `justfile` in the registry directory has shorthand commands

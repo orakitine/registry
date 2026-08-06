@@ -13,14 +13,15 @@ Pull first — do NOT read registry.yaml until this completes.
 ```bash
 git pull
 ```
-After the pull finishes, read `./registry.yaml` and parse all entries.
+After the pull finishes, read `./registry.yaml` and parse all entries from `registry.skills`, `registry.agents`, `registry.prompts`, `registry.output-styles`, and `registry.configs`.
 - Example: `git pull` → `Already up to date.` → read ./registry.yaml
 
 ### 2. **Search**
 - Match the keyword (case-insensitive) against entry `name` and `description`
 - A match is any entry where the keyword appears as a substring in either field
-- Collect all matches across all types
+- Collect all matches across all types (skill, agent, prompt, output-style, config)
 - Example: "browser" → matches `browser`, `browser-review`, `browser-workflow`, `browser-operator`, `browser-qa`
+- Example: "status" → matches config `statusline`
 
 ### 3. **Display Results**
 - IF: matches found → THEN: format as:

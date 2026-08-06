@@ -10,7 +10,7 @@ The `source` field in `registry.yaml` supports these formats (auto-detected):
 - `https://github.com/org/repo/blob/main/path/to/SKILL.md` — GitHub browser URL
 - `https://raw.githubusercontent.com/org/repo/main/path/to/SKILL.md` — GitHub raw URL
 
-**Important:** The source points to a specific file (SKILL.md, agent .md, or prompt file). Always pull the entire parent directory for skills, or just the file for agents/prompts.
+**Important:** The source points to a specific file (SKILL.md, agent .md, prompt file, output-style .md, or config file). Always pull the entire parent directory for skills, or just the file for agents/prompts/output-styles/configs.
 
 ## Source Parsing Rules
 
@@ -48,6 +48,14 @@ This is the shared procedure for pulling an asset from its source to a target di
      ```bash
      cp <prompt_file> <target_directory>/<prompt_name>.md
      ```
+   - **Output styles**: copy just the style file
+     ```bash
+     cp <style_file> <target_directory>/<style_name>.md
+     ```
+   - **Configs**: copy just the file, **preserving its own basename** (a config's filename is load-bearing — settings fragments reference it)
+     ```bash
+     cp <config_file> <target_directory>/<basename>
+     ```
 4. If the agent or prompt is nested in a subdirectory, copy the subdirectory to the target as well
 
 ### GitHub Source
@@ -75,6 +83,14 @@ This is the shared procedure for pulling an asset from its source to a target di
      ```bash
      cp "$tmp_dir/<file_path>" <target_directory>/<prompt_name>.md
      ```
+   - **Output styles**: copy just the file
+     ```bash
+     cp "$tmp_dir/<file_path>" <target_directory>/<style_name>.md
+     ```
+   - **Configs**: copy just the file, preserving its own basename
+     ```bash
+     cp "$tmp_dir/<file_path>" <target_directory>/<basename>
+     ```
 6. Clean up:
    ```bash
    rm -rf "$tmp_dir"
@@ -88,6 +104,8 @@ git clone --depth 1 --branch <branch> git@github.com:<org>/<repo>.git "$tmp_dir"
 ## Push Workflow
 
 Shared procedure for pushing local changes back to a source.
+
+**Single-file types** (agents, prompts, output styles, configs) push the file itself, not a directory — in the steps below, replace the directory copy with a single `cp` of the file to its path in the source.
 
 ### Local Source
 
@@ -132,8 +150,27 @@ The `requires` field uses typed references:
 - `skill:name` — references a skill in the catalog
 - `agent:name` — references an agent in the catalog
 - `prompt:name` — references a prompt in the catalog
+- `output-style:name` — references an output style in the catalog
+- `config:name` — references a config file in the catalog
 
 Resolve recursively: pull all dependencies before the requested item.
+
+## Settings Merge Workflow
+
+Some catalog entries carry an optional `settings:` field — a YAML map of Claude Code `settings.json` keys that activate the asset (e.g. `outputStyle` for an output style, `statusLine` for a statusline script). When an entry has `settings:`, run this procedure **after a successful fetch**:
+
+1. Resolve the target settings file by install scope:
+   - Global install → `~/.claude/settings.json`
+   - Project install → `.claude/settings.json`
+2. Read the settings file. IF it does not exist → create it containing just the entry's `settings:` map (as JSON) and skip to step 5.
+3. Deep-merge the entry's `settings:` map into the parsed settings: the entry's keys **win at the leaf level**; every key not named by the entry is **preserved untouched**. There are no delete semantics — the merge only sets keys.
+4. Write the file back with Edit (surgical change to the affected keys only — do not reformat or reorder the rest of the file).
+5. Report to the user exactly which keys changed, e.g. `statusLine.command: "<old>" → "bash ~/.claude/statusline.sh"`. IF every key already had the target value → report "settings already up to date" (the merge is idempotent — running it twice is a no-op).
+
+Rules:
+- Execute with Read/Edit only — no scripts, no `jq` mutations of the user's settings file.
+- Never remove or rewrite keys the entry does not name.
+- Catalog `settings:` values must be machine-portable: `~`-based paths, never `/Users/<name>/...`.
 
 ## Target Directories
 

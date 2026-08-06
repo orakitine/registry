@@ -8,7 +8,7 @@ default:
 install:
     claude --dangerously-skip-permissions --model opus "/registry install"
 
-# Add a new skill, agent, or prompt to the catalog
+# Add a new skill, agent, prompt, output style, or config to the catalog
 add prompt:
     claude --dangerously-skip-permissions --model opus "/registry add {{prompt}}"
 
@@ -20,7 +20,7 @@ use name:
 push name:
     claude --dangerously-skip-permissions --model opus "/registry push {{name}}"
 
-# Remove a locally installed skill
+# Remove an entry from the catalog (local deletion optional)
 remove name:
     claude --dangerously-skip-permissions --model opus "/registry remove {{name}}"
 

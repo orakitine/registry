@@ -1,7 +1,7 @@
 # Push a Skill to the Source
 
 ## Context
-The user has improved a skill locally and wants to push changes back to the source.
+The user has improved a skill (or agent, prompt, output style, or config) locally and wants to push changes back to the source.
 
 ## Input
 The user provides a skill name or description.
@@ -24,9 +24,11 @@ After the pull finishes, read `./registry.yaml`.
 ### 3. **Locate the Local Copy**
 - Check the default directory for the type (from `default_dirs`)
 - Check the global directory
+- For single-file types look for the file: agents/prompts/output-styles as `<name>.md`, configs by the source file's basename
 - IF: found in multiple places → THEN: ask which one to push
 - IF: not found locally → THEN: tell the user there's nothing to push
 - Example: Found at `~/.claude/skills/browser/` → proceed
+- Example: push `statusline` → found at `~/.claude/statusline.sh` → proceed (single file)
 
 ### 4. **Check for Conflicts**
 - IF: local source → THEN: compare the local installed copy with the source. If the source has been modified since last pull, warn: "The source has changes that aren't in your local copy. Pushing will overwrite them. Continue?"

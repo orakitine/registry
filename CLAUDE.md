@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A skill registry — a pure-agent application (no scripts, no CLIs) that manages distribution of Claude Code skills, agents, and prompts across devices, projects, and teams. Forked from [disler/the-library](https://github.com/disler/the-library), renamed and rebranded.
+A skill registry — a pure-agent application (no scripts, no CLIs) that manages distribution of Claude Code skills, agents, prompts, output styles, and config files across devices, projects, and teams. Forked from [disler/the-library](https://github.com/disler/the-library), renamed and rebranded.
 
 - **Repo**: https://github.com/orakitine/registry.git
 - **Install location**: `~/.claude/skills/registry/`
@@ -11,7 +11,7 @@ A skill registry — a pure-agent application (no scripts, no CLIs) that manages
 ## Architecture
 
 - `SKILL.md` — the brain, teaches Claude how to execute registry commands
-- `registry.yaml` — the catalog of pointers (NOT copies) to skills/agents/prompts
+- `registry.yaml` — the catalog of pointers (NOT copies) to skills/agents/prompts/output-styles/configs; entries may carry a `settings:` fragment merged into `settings.json` on install
 - `references/*.md` — step-by-step recipes for each command + shared reference material (source formats, fetch/push workflows)
 - `justfile` — terminal shortcuts for non-interactive use
 

@@ -10,7 +10,7 @@ Pull first — do NOT read registry.yaml until this completes.
 ```bash
 git pull
 ```
-After the pull finishes, read `./registry.yaml` and parse all entries from `registry.skills`, `registry.agents`, and `registry.prompts`.
+After the pull finishes, read `./registry.yaml` and parse all entries from `registry.skills`, `registry.agents`, `registry.prompts`, `registry.output-styles`, and `registry.configs`.
 - Example: `git pull` → `Already up to date.` → read ./registry.yaml
 
 ### 2. **Check Install Status**
@@ -19,8 +19,10 @@ For each entry:
 - Check if a directory matching the entry name exists in the **default** directory
 - Check if a directory matching the entry name exists in the **global** directory
 - Search recursively for name matches
+- For single-file types: an agent/prompt/output-style installs as `<name>.md`; a **config** installs under its source file's basename (e.g. `statusline` → `statusline.sh`) — check for that file, not a directory
 - Mark as: `installed (default)`, `installed (global)`, or `not installed`
 - Example: `browser` exists at `~/.claude/skills/browser/` → `installed (global)`
+- Example: `statusline` → `~/.claude/statusline.sh` exists → `installed (global)`
 
 ### 3. **Display Results**
 Format the output as a table grouped by type:
@@ -40,6 +42,16 @@ Format the output as a table grouped by type:
 ## Prompts
 | Name | Description | Source | Status |
 |------|-------------|--------|--------|
+
+## Output Styles
+| Name | Description | Source | Status |
+|------|-------------|--------|--------|
+| skippy | Skippy the Magnificent persona... | github.com/... | installed (global) |
+
+## Configs
+| Name | Description | Source | Status |
+|------|-------------|--------|--------|
+| statusline | Status line script... | github.com/... | installed (global) |
 ```
 
 - IF: a section is empty → THEN: show `No <type> in catalog.`

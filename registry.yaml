@@ -8,6 +8,12 @@ default_dirs:
   prompts:
     - default: .claude/commands/
     - global: ~/.claude/commands/
+  output-styles:
+    - default: .claude/output-styles/
+    - global: ~/.claude/output-styles/
+  configs:
+    - default: .claude/
+    - global: ~/.claude/
 
 registry:
   skills:
@@ -138,3 +144,17 @@ registry:
       source: https://github.com/orakitine/toolbox/blob/main/agents/elevenlabs-voice-designer.md
       requires: [skill:elevenlabs]
   prompts: []
+  output-styles:
+    - name: skippy
+      description: Skippy the Magnificent — sarcastic Elder AI persona output style (Expeditionary Force). Persona lives in conversation only; code, commits, and docs stay professional. Activated via the outputStyle settings key.
+      source: https://github.com/orakitine/toolbox/blob/main/output-styles/skippy.md
+      settings:
+        outputStyle: "Skippy"
+  configs:
+    - name: statusline
+      description: Claude Code status line script — model name, abbreviated directory, git branch + dirty marker, color-coded context-window % and 5-hour rate-limit % with time-to-reset. Reads statusLine JSON from stdin; prefers jq, falls back to python3; no network calls. Install GLOBALLY — the settings fragment points at ~/.claude/statusline.sh.
+      source: https://github.com/orakitine/toolbox/blob/main/statusline/statusline.sh
+      settings:
+        statusLine:
+          type: "command"
+          command: "bash ~/.claude/statusline.sh"

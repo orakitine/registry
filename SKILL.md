@@ -1,9 +1,10 @@
 ---
 name: registry
 description: >-
-  Skill registry for distributing skills, agents, and prompts across devices,
-  projects, and teams. Use when installing, distributing, syncing, or managing
-  skills from a catalog.
+  Skill registry for distributing skills, agents, prompts, output styles, and
+  config files across devices, projects, and teams. Use when installing,
+  distributing, syncing, or managing skills from a catalog — including
+  installing an output style or statusline config on a new machine.
 argument-hint: "[command] [name or details]"
 allowed-tools:
   - Read
@@ -16,7 +17,7 @@ allowed-tools:
 
 # Purpose
 
-A catalog-based distribution system for skills, agents, and prompts. The `./registry.yaml` stores pointers (local paths and GitHub URLs) to where assets live. Nothing is fetched until you ask for it. Pull specific items on demand.
+A catalog-based distribution system for skills, agents, prompts, output styles, and config files. The `./registry.yaml` stores pointers (local paths and GitHub URLs) to where assets live. Nothing is fetched until you ask for it. Pull specific items on demand. Entries whose assets need `settings.json` activation (an output style's `outputStyle`, a statusline's `statusLine`) carry a `settings:` fragment that `use` merges automatically.
 
 ## Variables
 
@@ -54,11 +55,12 @@ REGISTRY_REPO_URL: https://github.com/orakitine/registry.git   # Remote URL for 
 
 ### Add Entry
 
-- IF: User wants to register a new skill, agent, or prompt in the catalog
+- IF: User wants to register a new skill, agent, prompt, output style, or config in the catalog
 - THEN: Read and execute `./references/add.md`
 - EXAMPLES:
   - "/registry add deploy skill from https://github.com/org/repo/blob/main/skills/deploy/SKILL.md"
   - "/registry add browser-qa agent from ~/Documents/toolbox/agents/browser-qa.md"
+  - "/registry add skippy output style from https://github.com/org/repo/blob/main/output-styles/skippy.md"
 
 ### Use (Pull from Source)
 
@@ -67,6 +69,7 @@ REGISTRY_REPO_URL: https://github.com/orakitine/registry.git   # Remote URL for 
 - EXAMPLES:
   - "/registry use browser"
   - "/registry use browser-qa globally"
+  - "/registry use statusline globally" (config — also merges its `settings:` fragment)
 
 ### Push (Local to Source)
 

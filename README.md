@@ -1,12 +1,12 @@
 # The Registry
 
-A skill registry for private-first distribution of skills, agents, and prompts across devices, projects, and teams.
+A skill registry for private-first distribution of skills, agents, prompts, output styles, and config files across devices, projects, and teams.
 
 ## What It Is
 
-The Registry is a single skill whose only job is to manage other skills. It's a catalog of references — local file paths and GitHub repo URLs — that point to where your skills, agents, and prompts live. Nothing is copied or installed until you ask for it.
+The Registry is a single skill whose only job is to manage other skills. It's a catalog of references — local file paths and GitHub repo URLs — that point to where your skills, agents, prompts, output styles, and config files live. Nothing is copied or installed until you ask for it.
 
-Think of it as a `package.json` for agent capabilities — but instead of packages, you're managing skills, agents, and prompts. Instead of a registry like npm, you're pointing at your own GitHub repos and local paths.
+Think of it as a `package.json` for agent capabilities — but instead of packages, you're managing skills, agents, prompts, output styles, and configs. Instead of a registry like npm, you're pointing at your own GitHub repos and local paths.
 
 **This is a pure agent application.** No scripts, no CLIs, no dependencies, no build tools. The entire application is encoded in `SKILL.md` and a set of reference docs that teach the agent what to do. The agent IS the runtime.
 
@@ -35,6 +35,12 @@ default_dirs:
   prompts:
     - default: .claude/commands/
     - global: ~/.claude/commands/
+  output-styles:
+    - default: .claude/output-styles/
+    - global: ~/.claude/output-styles/
+  configs:
+    - default: .claude/
+    - global: ~/.claude/
 
 registry:
   skills:
@@ -47,9 +53,25 @@ registry:
       source: https://github.com/myorg/private-skills/blob/main/skills/remote-skill/SKILL.md
   agents: []
   prompts: []
+  output-styles:
+    - name: my-style
+      description: A custom output style
+      source: https://github.com/myorg/toolbox/blob/main/output-styles/my-style.md
+      settings:
+        outputStyle: "My Style"
+  configs:
+    - name: statusline
+      description: Status line script for the terminal footer
+      source: https://github.com/myorg/toolbox/blob/main/statusline/statusline.sh
+      settings:
+        statusLine:
+          type: "command"
+          command: "bash ~/.claude/statusline.sh"
 ```
 
 The catalog stores pointers, not copies. Skills live in their source repos. You pull on demand.
+
+**Output styles and configs** are single files: an output style installs as `<name>.md` under `output-styles/`; a config installs under its own basename (a `statusline.sh` stays `statusline.sh`). The optional **`settings:`** field holds the `settings.json` keys that activate the asset — `use` deep-merges them into the target scope's `settings.json` (entry keys win, everything else preserved, idempotent). Keep `settings:` values machine-portable: `~`-based paths, never `/Users/<name>/...`.
 
 ### Source Formats
 
@@ -59,7 +81,7 @@ The catalog stores pointers, not copies. Skills live in their source repos. You 
 | GitHub browser URL | `https://github.com/org/repo/blob/main/path/to/SKILL.md`           |
 | GitHub raw URL     | `https://raw.githubusercontent.com/org/repo/main/path/to/SKILL.md` |
 
-The source points to a specific file. The system pulls the entire parent directory (skills include scripts, references, assets — not just the markdown file).
+The source points to a specific file. For skills the system pulls the entire parent directory (skills include scripts, references, assets — not just the markdown file); agents, prompts, output styles, and configs pull just the file.
 
 For private repos, authentication uses SSH keys or `GITHUB_TOKEN` automatically.
 
@@ -68,7 +90,7 @@ For private repos, authentication uses SSH keys or `GITHUB_TOKEN` automatically.
 Dependencies use typed references to avoid name collisions:
 
 ```yaml
-requires: [skill:base-utils, agent:reviewer, prompt:task-router]
+requires: [skill:base-utils, agent:reviewer, prompt:task-router, output-style:my-style, config:statusline]
 ```
 
 Dependencies are resolved and pulled first, recursively.
@@ -154,10 +176,12 @@ Want it globally available on this machine?
 ### Justfile Shortcuts
 
 ```bash
+just install               # First-time setup
 just list                  # List catalog
 just use my-skill          # Pull a skill
 just push my-skill         # Push changes back
 just add "name: foo, description: bar, source: /path/to/SKILL.md"
+just remove my-skill       # Remove from catalog
 just sync                  # Re-pull all installed items
 just search "keyword"
 ```
