@@ -145,6 +145,9 @@ registry:
       requires: [skill:elevenlabs]
   prompts: []
   output-styles:
+    - name: asd-ste100
+      description: ASD-STE100 Simplified Technical English (Issue 9, 2025) output style — short sentences (max 20 words instruction / 25 description), active voice, simple tenses, one word one meaning, imperative steps, warnings before the step. Installs passive — no settings fragment, so installing does not switch the active output style; activate with /output-style.
+      source: https://github.com/orakitine/toolbox/blob/main/output-styles/asd-ste100.md
     - name: skippy
       description: Skippy the Magnificent — sarcastic Elder AI persona output style (Expeditionary Force). Persona lives in conversation only; code, commits, and docs stay professional. Activated via the outputStyle settings key.
       source: https://github.com/orakitine/toolbox/blob/main/output-styles/skippy.md
