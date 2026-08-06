@@ -2,9 +2,9 @@
 # Append-only metadata. Every field except `created` is a list that is ONLY appended to.
 title: Distribute output styles and statusline via the registry
 created: 2026-08-05T00:00:00-04:00
-modified: [2026-08-05T00:00:00-04:00, 2026-08-05T22:17:42-04:00]
+modified: [2026-08-05T00:00:00-04:00, 2026-08-05T22:17:42-04:00, 2026-08-05T22:30:00-04:00]
 context: []          # no CONTEXT.md in this repo yet; plan uses plain language
-commits: []
+commits: [toolbox@9d3460e, registry@349eab2]
 agents: [claude-fable-5]
 sessions: [8570c44d]
 back_refs: []
@@ -181,35 +181,35 @@ Shell validation for this phase:
 
 🔁 **Do not exit this phase until every box above is checked.** If a command fails, fix the cause and re-run — loop until all pass.
 
-### `[wip]` Phase 4: Dogfood — install both on this machine through the registry
+### `[x]` Phase 4: Dogfood — install both on this machine through the registry
 
 Commit and push the registry changes, update the deployed clone, and run the real `use` flows end to end. This machine becomes the first consumer, which also fixes its hardcoded `/Users/olegrakitine` statusline path.
 
 #### 1. Ship and deploy
 
-- `[]` Commit registry changes (`registry.yaml`, `SKILL.md`, `README.md`, `references/`, this plan) and push to `main`
-- `[]` `git -C ~/.claude/skills/registry pull` — deployed clone picks up the new recipes
+- `[x]` Commit registry changes (`registry.yaml`, `SKILL.md`, `README.md`, `references/`, this plan) and push to `main`
+- `[x]` `git -C ~/.claude/skills/registry pull` — deployed clone picks up the new recipes
 
 #### 2. End-to-end install
 
-- `[]` Snapshot `~/.claude/settings.json` to a temp backup for comparison
-- `[]` Run the `use` workflow for `skippy` globally — file lands at `~/.claude/output-styles/skippy.md`, `outputStyle: "Skippy"` merged (already-set value → idempotent no-op, reported as unchanged)
-- `[]` Run the `use` workflow for `statusline` globally — file lands at `~/.claude/statusline.sh`, `statusLine.command` becomes `bash ~/.claude/statusline.sh` (the portability fix applied to this machine)
-- `[]` Diff settings.json against the backup: only `statusLine.command` changed; every unrelated key intact
+- `[x]` Snapshot `~/.claude/settings.json` to a temp backup for comparison
+- `[x]` Run the `use` workflow for `skippy` globally — file lands at `~/.claude/output-styles/skippy.md`, `outputStyle: "Skippy"` merged (already-set value → idempotent no-op, reported as unchanged)
+- `[x]` Run the `use` workflow for `statusline` globally — file lands at `~/.claude/statusline.sh`, `statusLine.command` becomes `bash ~/.claude/statusline.sh` (the portability fix applied to this machine)
+- `[x]` Diff settings.json against the backup: only `statusLine.command` changed; every unrelated key intact
 
 #### 3. Testing Strategy
 
 Behaviors to verify through the public interface:
 
-- `[]` A `use` of an entry with `settings:` changes only that entry's keys in `settings.json` — verified by the before/after diff showing exactly one changed leaf
-- `[]` The installed statusline script still renders a status line when fed sample stdin JSON — verified by piping a minimal Claude Code statusLine JSON object into `bash ~/.claude/statusline.sh` and checking non-empty single-line output
-- `[]` Running the same `use` twice is idempotent — verified by a second run producing byte-identical `settings.json`
+- `[x]` A `use` of an entry with `settings:` changes only that entry's keys in `settings.json` — verified by the before/after diff showing exactly one changed leaf
+- `[x]` The installed statusline script still renders a status line when fed sample stdin JSON — verified by piping a minimal Claude Code statusLine JSON object into `bash ~/.claude/statusline.sh` and checking non-empty single-line output
+- `[x]` Running the same `use` twice is idempotent — verified by a second run producing byte-identical `settings.json`
 
 Shell validation for this phase:
 
-- `[]` `diff ~/.claude/output-styles/skippy.md ~/Documents/personal/toolbox/output-styles/skippy.md` — installed copy matches source of truth
-- `[]` `python3 -c "import json; d=json.load(open('$HOME/.claude/settings.json')); assert d['statusLine']['command']=='bash ~/.claude/statusline.sh'; assert d['outputStyle']=='Skippy'; print('ok')"` — merged wiring is the portable form
-- `[]` `echo '{"model":{"display_name":"Test"},"workspace":{"current_dir":"'$HOME'"}}' | bash ~/.claude/statusline.sh | head -1 | grep -q . && echo renders` — script executes and prints
+- `[x]` `diff ~/.claude/output-styles/skippy.md ~/Documents/personal/toolbox/output-styles/skippy.md` — installed copy matches source of truth
+- `[x]` `python3 -c "import json; d=json.load(open('$HOME/.claude/settings.json')); assert d['statusLine']['command']=='bash ~/.claude/statusline.sh'; assert d['outputStyle']=='Skippy'; print('ok')"` — merged wiring is the portable form
+- `[x]` `echo '{"model":{"display_name":"Test"},"workspace":{"current_dir":"'$HOME'"}}' | bash ~/.claude/statusline.sh | head -1 | grep -q . && echo renders` — script executes and prints
 
 🔁 **Do not exit this phase until every box above is checked.** If a command fails, fix the cause and re-run — loop until all pass.
 
@@ -217,11 +217,11 @@ Shell validation for this phase:
 
 Run these to validate the entire plan is complete:
 
-- `[]` `git -C ~/Documents/personal/toolbox status -sb | head -1 && git -C ~/Documents/personal/registry status -sb | head -1` — both repos pushed, neither ahead of origin
-- `[]` `cd ~/Documents/personal/registry && [ "$(grep -cE '^  (output-styles|configs):' registry.yaml)" = "4" ] && echo schema-ok` — both new types present in BOTH `default_dirs` and `registry` (2 sections × 2 places = 4 hits)
-- `[]` `! grep -rn '/Users/' ~/Documents/personal/registry/registry.yaml` — no machine-specific paths in the catalog
-- `[]` `diff ~/.claude/output-styles/skippy.md ~/Documents/personal/toolbox/output-styles/skippy.md && diff ~/.claude/statusline.sh ~/Documents/personal/toolbox/statusline/statusline.sh` — installed artifacts match the source of truth
-- `[]` `python3 -c "import json; d=json.load(open('$HOME/.claude/settings.json')); assert d['statusLine']['command']=='bash ~/.claude/statusline.sh'; print('ok')"` — this machine runs the distributed, portable wiring
+- `[x]` `git -C ~/Documents/personal/toolbox status -sb | head -1 && git -C ~/Documents/personal/registry status -sb | head -1` — both repos pushed, neither ahead of origin
+- `[x]` `cd ~/Documents/personal/registry && [ "$(grep -cE '^  (output-styles|configs):' registry.yaml)" = "4" ] && echo schema-ok` — both new types present in BOTH `default_dirs` and `registry` (2 sections × 2 places = 4 hits)
+- `[x]` `! grep -rn '/Users/' ~/Documents/personal/registry/registry.yaml` — no machine-specific paths in the catalog
+- `[x]` `diff ~/.claude/output-styles/skippy.md ~/Documents/personal/toolbox/output-styles/skippy.md && diff ~/.claude/statusline.sh ~/Documents/personal/toolbox/statusline/statusline.sh` — installed artifacts match the source of truth
+- `[x]` `python3 -c "import json; d=json.load(open('$HOME/.claude/settings.json')); assert d['statusLine']['command']=='bash ~/.claude/statusline.sh'; print('ok')"` — this machine runs the distributed, portable wiring
 
 🔁 **The plan is not complete until every box is checked and every command passes.** If a step is genuinely impossible, mark it `[f]`, record why in Notes, and move on.
 
